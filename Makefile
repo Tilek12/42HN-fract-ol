@@ -6,14 +6,14 @@
 #    By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 10:54:09 by tkubanyc          #+#    #+#              #
-#    Updated: 2024/05/26 14:46:12 by tkubanyc         ###   ########.fr        #
+#    Updated: 2024/05/28 10:43:28 by tkubanyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME	:= fractol
 CC		:= cc
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror
 LIBMLX	:= ./lib/MLX42
 
 # Include directories
@@ -23,11 +23,13 @@ LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 # Source and Object files
 SRC_DIR	:= src
 OBJ_DIR	:= obj
-SRCS	:= $(SRC_DIR)/fractol.c
+SRCS	:= $(SRC_DIR)/main.c \
+			$(SRC_DIR)/fractol_init.c \
+			$(SRC_DIR)/error_handler.c
 OBJS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Header
-HEADER = includes/fractol.h
+HEADER = include/fractol.h
 
 # Libft
 LIBFT_DIR	:= ./lib/libft
@@ -42,10 +44,12 @@ GNL_OBJS	:= $(patsubst $(LIBFT_DIR)/ft_get_next_line/%.c, $(OBJ_DIR)/ft_get_next
 all: libmlx $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(PRINTF) $(GNL_OBJS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(GNL_OBJS) $(LIBFT) $(PRINTF) $(LIBS) > /dev/null 2>&1
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(GNL_OBJS) $(LIBFT) $(PRINTF) $(LIBS)
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build > /dev/null 2>&1 && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
+	@if [ ! -d "$(LIBMLX)/build" ]; then \
+		cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; \
+	fi
 
 $(OBJ_DIR)/ft_get_next_line/%.o: $(LIBFT_DIR)/ft_get_next_line/%.c | $(OBJ_DIR)/ft_get_next_line
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -54,26 +58,26 @@ $(OBJ_DIR)/ft_get_next_line:
 	@mkdir -p $(OBJ_DIR)/ft_get_next_line
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) > /dev/null 2>&1
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(PRINTF):
-	@$(MAKE) -C $(PRINTF_DIR) > /dev/null 2>&1
+	@$(MAKE) -C $(PRINTF_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $< && printf "Compiling: $(notdir $<)\n" > /dev/null 2>&1
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
 
 clean:
-	@rm -rf $(OBJ_DIR) > /dev/null 2>&1
-	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null 2>&1
-	@$(MAKE) -C $(PRINTF_DIR) clean > /dev/null 2>&1
-	@rm -rf $(LIBMLX)/build > /dev/null 2>&1
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(PRINTF_DIR) clean
+	@rm -rf $(LIBMLX)/build
 	@printf "Cleaning: object files and libft\n"
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
-	@$(MAKE) -C $(PRINTF_DIR) fclean > /dev/null 2>&1
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(PRINTF_DIR) fclean
 	@printf "Full cleaning: executable and libraries\n"
 
 re: fclean all

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 11:20:44 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/05/26 14:40:16 by tkubanyc         ###   ########.fr       */
+/*   Created: 2024/05/27 10:09:00 by tkubanyc          #+#    #+#             */
+/*   Updated: 2024/05/28 10:56:00 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int	main(void)
+void	error_exit()
 {
-	// ft_printf("Inside main function\n");
-	return (0);
+	ft_putstr_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
