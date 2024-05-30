@@ -6,7 +6,7 @@
 #    By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 10:54:09 by tkubanyc          #+#    #+#              #
-#    Updated: 2024/05/28 10:43:28 by tkubanyc         ###   ########.fr        #
+#    Updated: 2024/05/28 12:47:17 by tkubanyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRC_DIR	:= src
 OBJ_DIR	:= obj
 SRCS	:= $(SRC_DIR)/main.c \
+			$(SRC_DIR)/input_handler.c \
 			$(SRC_DIR)/fractol_init.c \
 			$(SRC_DIR)/error_handler.c
 OBJS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

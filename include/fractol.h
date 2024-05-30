@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:50:14 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/05/28 10:29:33 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:06:26 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 
 #define ERROR_MESSAGE "Insert right input. For example:\n\t\t \" ./fractol mandelbrot \" \n\t\t \" ./farctol julia <real_value> <i_value> \"\n"
-#define WIDTH	1000
-#define HEIGHT	1000
+#define WIDTH	1200
+#define HEIGHT	1200
 
 typedef struct	s_img
 {
@@ -31,10 +31,11 @@ typedef struct	s_img
 typedef struct	s_fractal
 {
 	char	*name;
-	void	*mlx_connect;
+	void	*mlx_connection;
 	t_img	img;
 }				t_fractal;
 
+void	input_handler(int argc, char **argv, t_fractal *f);
 void	fractal_init(t_fractal *fract);
 void	error_exit();
 

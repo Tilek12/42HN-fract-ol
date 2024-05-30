@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:20:44 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/05/28 11:03:40 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:35:59 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,12 @@ static void ft_hook(void* param)
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
-	// MLX allows you to define its core behaviour before startup.
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
-	if (!mlx)
-		error_exit();
 
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		error_exit();
-
-	if ((argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10))
-		|| (argc == 4 && !ft_strncmp(argv[1], "julia", 5)))
-	{
-		fractal.name = argv[1];
-		// fractal_init(&fractal);
-		// mlx_loop(fractal.mlx_connect);
-		mlx_loop_hook(mlx, ft_hook, mlx);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
-		return (EXIT_SUCCESS);
-	}
-	else
-	{
-		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+	input_handler(argc, argv, &fractal);
+	fractal_init(&fractal);
+	fractal_print(&fractal);
+	mlx_loop_hook(fractal.mlx_connection, ft_hook, fractal.mlx_connection);
+	mlx_loop(fractal.mlx_connection);
+	mlx_terminate(fractal.mlx_connection);
+	return (EXIT_SUCCESS);
 }
