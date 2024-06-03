@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 16:34:32 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 16:42:03 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:38:48 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	draw_pixels(int x, int y, t_fractal *f)
 	z.x = 0.0;
 	z.y = 0.0;
 	i = 0;
-	c.x = scale(x, -2, +2, WIDTH) + f->shift_x;
-	c.y = scale(y, +2, -2, HEIGHT) + f->shift_y;
+	c.x = (scale(x, -2, +2, WIDTH) * f->zoom) + f->shift_x;
+	c.y = (scale(y, +2, -2, HEIGHT) * f->zoom) + f->shift_y;
 	while (i < f->fract_iter)
 	{
 		z = sum_point(square_point(z), c);
@@ -55,5 +55,5 @@ void	fractal_print(t_fractal *f)
 	}
 	mlx_image_to_window(f->init, f->img, 0, 0);
 	if (mlx_image_to_window(f->init, f->img, 0, 0) < 0)
-		error_exit();
+		error_exit(f);
 }

@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:50:14 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 17:25:26 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:55:53 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 
-#define ERROR_MESSAGE "Insert right input. For example:\n\t\t \" ./fractol mandelbrot \" \n\t\t \" ./farctol julia <real_value> <i_value> \"\n"
+#define ERROR_MESSAGE "Insert right input. For example: \n\t\t \" ./fractol mandelbrot \" \n\t\t \" ./farctol julia <real_value> <i_value> \"\n"
 
 #define WIDTH	1200
 #define HEIGHT	1200
@@ -61,15 +61,18 @@ typedef struct	s_fractal
 	int			fract_iter;
 	double		shift_x;
 	double		shift_y;
+	double		zoom;
 }				t_fractal;
 
 void	input_handler(int argc, char **argv, t_fractal *f);
 void	fractal_init(t_fractal *fract);
 void	fractal_print(t_fractal *f);
 void	draw_pixels(int x, int y, t_fractal *f);
-void	set_data(t_fractal *f);
 void	action_listener(t_fractal *f);
-void	error_exit();
+void	close_hook(void *param);
+void	scroll_hook(double xdelta, double ydelta, void* param);
+void	key_hook(mlx_key_data_t keydata, void *param);
+void	error_exit(t_fractal *f);
 void	esc_exit(t_fractal *f);
 double	scale(double unscaled_num, double new_min, double new_max, double old_max);
 t_point	sum_point(t_point z1, t_point z2);

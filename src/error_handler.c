@@ -6,14 +6,16 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:09:00 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 16:52:29 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:37:53 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	error_exit()
+void	error_exit(t_fractal *f)
 {
+	if (f->init != NULL)
+		free (f->init);
 	ft_putstr_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
