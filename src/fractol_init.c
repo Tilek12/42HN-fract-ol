@@ -6,16 +6,18 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:04:40 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 12:42:17 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:39:08 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	data_init(t_fractal *f)
+void	set_data(t_fractal *f)
 {
 	f->outside_value = 4;
-	f->fract_quality = 120;
+	f->fract_iter = 230;
+	f->shift_x = 0;
+	f->shift_y = 0;
 }
 
 void	fractal_init(t_fractal *f)
@@ -32,5 +34,5 @@ void	fractal_init(t_fractal *f)
 		free(f->init);
 		error_exit();
 	}
-	data_init(f);
+	set_data(f);
 }

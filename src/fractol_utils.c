@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:46:37 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 12:24:12 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:42:09 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ double	scale(double unscaled_num, double new_min,
 				double new_max, double old_max)
 {
 	double	result;
-	// double	old_min;
 
-	// old_min = 0;
 	result = (new_max - new_min) * (unscaled_num - 0) /
 				(old_max - 0) + new_min;
 	return (result);
