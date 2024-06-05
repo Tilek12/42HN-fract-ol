@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:50:14 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/03 20:55:53 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:57:33 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 #define WIDTH	1200
 #define HEIGHT	1200
+#define MIN_WIDTH	120
+#define MIN_HEIGHT	120
 
 #define BLACK		0x000000
 #define WHITE		0xFFFFFF
@@ -46,6 +48,20 @@
 #define CHARTREUSE	0x7FFF00
 #define GREEN		0x00FF7F
 
+// typedef struct	s_color
+// {
+// 	int		r;
+// 	int		g;
+// 	int		b;
+// 	int		r1;
+// 	int		g1;
+// 	int		b1;
+// 	int		r2;
+// 	int		g2;
+// 	int		b2;
+// 	double	t;
+// }				t_color;
+
 typedef struct	s_point
 {
 	double	x;
@@ -55,27 +71,33 @@ typedef struct	s_point
 typedef struct	s_fractal
 {
 	char		*name;
-	void		*init;
+	mlx_t		*init;
 	mlx_image_t	*img;
+	mlx_image_t *img_buf;
+	int32_t		win_width;
+	int32_t		win_height;
 	double		outside_value;
-	int			fract_iter;
+	int			iter_std;
+	int			iter_max;
+	int			iter_min;
+	double		julia_x;
+	double		julia_y;
 	double		shift_x;
 	double		shift_y;
 	double		zoom;
 }				t_fractal;
 
 void	input_handler(int argc, char **argv, t_fractal *f);
-void	fractal_init(t_fractal *fract);
-void	fractal_print(t_fractal *f);
-void	draw_pixels(int x, int y, t_fractal *f);
-void	action_listener(t_fractal *f);
-void	close_hook(void *param);
-void	scroll_hook(double xdelta, double ydelta, void* param);
-void	key_hook(mlx_key_data_t keydata, void *param);
+void	fractol_init(t_fractal *f, char *fractal_name);
+void	fractol_render(t_fractal *f);
+void	action_listener(void *param);
 void	error_exit(t_fractal *f);
 void	esc_exit(t_fractal *f);
+// int		color_init(t_color *c, int color1, int color2, int i);
 double	scale(double unscaled_num, double new_min, double new_max, double old_max);
 t_point	sum_point(t_point z1, t_point z2);
 t_point	square_point(t_point z);
+double	ft_atod(char *str);
+int		is_double(char *str);
 
 #endif

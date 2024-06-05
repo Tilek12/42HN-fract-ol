@@ -6,7 +6,7 @@
 #    By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 10:54:09 by tkubanyc          #+#    #+#              #
-#    Updated: 2024/06/03 17:25:25 by tkubanyc         ###   ########.fr        #
+#    Updated: 2024/06/05 15:39:24 by tkubanyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CFLAGS	:= -Wextra -Wall -Werror -O3
 LIBMLX	:= ./lib/MLX42
 
 # Include directories
-INCLUDES	:= -I ./include -I ./lib/libft -I $(LIBMLX)/include
-LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+INCLUDES	:= -I ./include -I ./lib/libft -I $(LIBMLX)/include -I ../../../LeakSanitizer
+LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L ../../../LeakSanitizer -llsan -lc++  -Wno-gnu-include-next
 
 # Source and Object files
 SRC_DIR	:= src
