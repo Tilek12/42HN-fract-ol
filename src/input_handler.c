@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:17:27 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/05 20:11:12 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/06 21:08:08 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	input_handler(int argc, char **argv, t_fractal *f)
 				&& is_double(argv[2]) && is_double(argv[3]))
 	{
 		fractol_init(f, argv[1]);
-		f->julia_x = ft_atod(argv[2]);
-		f->julia_y = ft_atod(argv[3]);
+		f->julia.x = ft_atod(argv[2]);
+		f->julia.y = ft_atod(argv[3]);
 	}
 	else
 	{
