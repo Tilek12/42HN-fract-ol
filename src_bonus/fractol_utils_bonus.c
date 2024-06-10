@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_utils.c                                    :+:      :+:    :+:   */
+/*   fractol_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:46:37 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/10 00:42:38 by tkubanyc         ###   ########.fr       */
+/*   Created: 2024/06/09 18:15:56 by tkubanyc          #+#    #+#             */
+/*   Updated: 2024/06/10 03:05:20 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
 
 /*--------------------------------------------------*/
 /*  Scales the number according to new frame sizes  */
@@ -39,16 +39,24 @@ t_point	sum_point(t_point z1, t_point z2)
 
 /*----------------------------------------*/
 /*  Calculates according to the formula:  */
-/*----------------------------------------*/
-/*  (real) x = x^2 - y^2  */
-/*  (i) y = 2 * x * y     */
-/*------------------------*/
-t_point	square_point(t_point z)
+/*------------------------------------------------------*/
+/*  (real) x = (x * x) - (y * y)                        */
+/*  (imag) y = 2 * x * y  --> for Mandelbrot and Julia  */
+/*  (imag) y = -2 * x * y    --> for Tricorn            */
+/*  (imag) y = -2 * abs(x * y)  --> for Burning ship    */
+/*------------------------------------------------------*/
+t_point	square_point(t_point z, char *fractal_name)
 {
 	t_point	square;
 
 	square.x = (z.x * z.x) - (z.y * z.y);
-	square.y = 2 * z.x * z.y;
+	if (!ft_strncmp(fractal_name, "mandelbrot", 10)
+		|| !ft_strncmp(fractal_name, "julia", 5))
+		square.y = 2 * z.x * z.y;
+	else if (!ft_strncmp(fractal_name, "tricorn", 7))
+		square.y = -2 * z.x * z.y;
+	else if (!ft_strncmp(fractal_name, "burning_ship", 12))
+		square.y = -2 * fabs(z.x * z.y);
 	return (square);
 }
 

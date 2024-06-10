@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 10:50:14 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/09 23:40:14 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:21:35 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 /*----------------------*/
 /*  Included libraries  */
@@ -50,6 +50,10 @@
 # define AQUA 0x00FFAAFF
 # define GOLD 0xFFD700FF
 # define LIME 0xAAFF00FF
+# define SKY_BLUE 0x00AAFFFF
+# define BRIGHT_SKY_BLUE 0x87CEEBFF
+# define BRIGHT_PALE_GREEN 0x98FB98FF
+# define SEA_GREEN 0x2E8B57FF
 
 /*-----------*/
 /*  Structs  */
@@ -86,6 +90,8 @@ typedef struct s_fractal
 	t_point		z;
 	t_point		c;
 	t_point		julia;
+	t_point		cur_pos;
+	t_point		shift;
 	double		outside_value;
 	int			iter_std;
 	int			iter_max;
@@ -113,7 +119,7 @@ void	esc_exit(t_fractal *f);
 double	scale(double unscaled_num, double new_min, \
 				double new_max, double old_max);
 t_point	sum_point(t_point z1, t_point z2);
-t_point	square_point(t_point z);
+t_point	square_point(t_point z, char *fractal_name);
 double	ft_atod(char *str);
 int		is_double(char *str);
 

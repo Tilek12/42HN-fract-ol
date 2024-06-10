@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_init.c                                     :+:      :+:    :+:   */
+/*   fractol_init_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:04:40 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/10 00:22:19 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:44:19 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
 
 /*-----------------------------*/
 /*  Creates color transitions  */
@@ -41,6 +41,8 @@ void	fractol_init(t_fractal *f, char *fractal_name)
 	f->iter_std = 50;
 	f->iter_max = 1000;
 	f->iter_min = 20;
+	f->shift.x = 0.0;
+	f->shift.y = 0.0;
 	f->zoom = 1.0;
 	f->is_mutable = 1;
 	f->is_psychedelic = 0;

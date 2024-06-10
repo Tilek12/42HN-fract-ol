@@ -1,16 +1,92 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_render.c                                   :+:      :+:    :+:   */
+/*   fractol_render_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 16:34:32 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/10 10:53:05 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:13:56 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
+
+/*------------------------------------------------------------*/
+/*  Creates pixels of Burning Ship according to the formula:  */
+/*------------------------------------------------------------*/
+/*  z = abs(z^2) + c  */
+/*  z0 = 0            */
+/*--------------------------------*/
+/*  range x (real): [-2.0, +2.0]  */
+/*  range y (imag): [-2.0, +2.0]  */
+/*--------------------------------*/
+static void	draw_pixels_burning_ship(int x, int y, t_fractal *f, int *color)
+{
+	int	i;
+
+	i = 0;
+	f->z.x = 0.0;
+	f->z.y = 0.0;
+	f->c.x = (scale(x, -2, +2, f->win_width) * f->zoom) + f->shift.x;
+	f->c.y = (scale(y, +2, -2, f->win_height) * f->zoom) + f->shift.y;
+	while (i < f->iter_std)
+	{
+		f->z = sum_point(square_point(f->z, f->name), f->c);
+		if (((f->z.x * f->z.x) + (f->z.y * f->z.y)) > f->outside_value)
+		{
+			if (f->is_psychedelic == 1)
+				*color = scale(i, BLACK, WHITE, f->iter_std);
+			else
+			{
+				f->color.t = (double)i / f->iter_std;
+				*color = color_init(f, BLACK, SEA_GREEN);
+			}
+			mlx_put_pixel(f->img, x, y, *color);
+			return ;
+		}
+		i++;
+	}
+	mlx_put_pixel(f->img, x, y, BRIGHT_PALE_GREEN);
+}
+
+/*-----------------------------------------------------------*/
+/*  Creates pixels of Tricorn Set according to the formula:  */
+/*-----------------------------------------------------------*/
+/*  z = conjugate(z^2) + c  */
+/*  z0 = 0                  */
+/*--------------------------------*/
+/*  range x (real): [-2.0, +2.0]  */
+/*  range y (imag): [-2.0, +2.0]  */
+/*--------------------------------*/
+static void	draw_pixels_tricorn(int x, int y, t_fractal *f, int *color)
+{
+	int	i;
+
+	i = 0;
+	f->z.x = 0.0;
+	f->z.y = 0.0;
+	f->c.x = (scale(x, -2, +2, f->win_width) * f->zoom) + f->shift.x;
+	f->c.y = (scale(y, +2, -2, f->win_height) * f->zoom) + f->shift.y;
+	while (i < f->iter_std)
+	{
+		f->z = sum_point(square_point(f->z, f->name), f->c);
+		if (((f->z.x * f->z.x) + (f->z.y * f->z.y)) > f->outside_value)
+		{
+			if (f->is_psychedelic == 1)
+				*color = scale(i, BLACK, WHITE, f->iter_std);
+			else
+			{
+				f->color.t = (double)i / f->iter_std;
+				*color = color_init(f, BLACK, SKY_BLUE);
+			}
+			mlx_put_pixel(f->img, x, y, *color);
+			return ;
+		}
+		i++;
+	}
+	mlx_put_pixel(f->img, x, y, BRIGHT_SKY_BLUE);
+}
 
 /*---------------------------------------------------------*/
 /*  Creates pixels of Julia Set according to the formula:  */
@@ -26,13 +102,13 @@ static void	draw_pixels_julia(int x, int y, t_fractal *f, int *color)
 	int	i;
 
 	i = 0;
-	f->z.x = (scale(x, -2, +2, f->win_width) * f->zoom);
-	f->z.y = (scale(y, +2, -2, f->win_height) * f->zoom);
+	f->z.x = (scale(x, -2, +2, f->win_width) * f->zoom) + f->shift.x;
+	f->z.y = (scale(y, +2, -2, f->win_height) * f->zoom) + f->shift.y;
 	f->c.x = f->julia.x;
 	f->c.y = f->julia.y;
 	while (i < f->iter_std)
 	{
-		f->z = sum_point(square_point(f->z), f->c);
+		f->z = sum_point(square_point(f->z, f->name), f->c);
 		if (((f->z.x * f->z.x) + (f->z.y * f->z.y)) > f->outside_value)
 		{
 			if (f->is_psychedelic == 1)
@@ -66,11 +142,11 @@ static void	draw_pixels_mandelbrot(int x, int y, t_fractal *f, int *color)
 	i = 0;
 	f->z.x = 0.0;
 	f->z.y = 0.0;
-	f->c.x = (scale(x, -2, +2, f->win_width) * f->zoom);
-	f->c.y = (scale(y, +2, -2, f->win_height) * f->zoom);
+	f->c.x = (scale(x, -2, +2, f->win_width) * f->zoom) + f->shift.x;
+	f->c.y = (scale(y, +2, -2, f->win_height) * f->zoom) + f->shift.y;
 	while (i < f->iter_std)
 	{
-		f->z = sum_point(square_point(f->z), f->c);
+		f->z = sum_point(square_point(f->z, f->name), f->c);
 		if (((f->z.x * f->z.x) + (f->z.y * f->z.y)) > f->outside_value)
 		{
 			if (f->is_psychedelic == 1)
@@ -107,6 +183,10 @@ void	fractol_render(t_fractal *f)
 				draw_pixels_mandelbrot(x, y, f, &color);
 			else if (!ft_strncmp(f->name, "julia", 5))
 				draw_pixels_julia(x, y, f, &color);
+			else if (!ft_strncmp(f->name, "tricorn", 7))
+				draw_pixels_tricorn(x, y, f, &color);
+			else if (!ft_strncmp(f->name, "burning_ship", 12))
+				draw_pixels_burning_ship(x, y, f, &color);
 			x++;
 		}
 		y++;

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_listener.c                                  :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 16:03:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/10 00:25:25 by tkubanyc         ###   ########.fr       */
+/*   Created: 2024/05/25 11:20:44 by tkubanyc          #+#    #+#             */
+/*   Updated: 2024/06/09 21:56:33 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/fractol_bonus.h"
 
-/*-------------------------*/
-/*  Handles event actions  */
-/*-------------------------*/
-void	action_listener(void *param)
+int	main(int argc, char **argv)
 {
-	t_fractal	*f;
+	t_fractal	fractal;
 
-	f = param;
-	mlx_close_hook(f->mlx, &close_hook, f);
-	mlx_resize_hook(f->mlx, &resize_hook, f);
-	mlx_scroll_hook(f->mlx, &scroll_hook, f);
-	mlx_cursor_hook(f->mlx, &cursor_hook, f);
-	mlx_key_hook(f->mlx, &key_hook, f);
+	input_handler(argc, argv, &fractal);
+	fractol_render(&fractal);
+	if (!mlx_loop_hook(fractal.mlx, action_listener, &fractal))
+		esc_exit(&fractal);
+	mlx_loop(fractal.mlx);
+	esc_exit(&fractal);
 }
