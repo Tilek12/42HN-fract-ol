@@ -6,7 +6,7 @@
 #    By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 10:54:09 by tkubanyc          #+#    #+#              #
-#    Updated: 2024/06/10 12:56:15 by tkubanyc         ###   ########.fr        #
+#    Updated: 2024/06/10 14:35:44 by tkubanyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	:= fractol
 BONUS	:= fractol_bonus
 CC		:= cc
 CFLAGS	:= -Wextra -Wall -Werror -Ofast
-LIBMLX	:= ./lib/MLX42
+LIBMLX	:= ./lib/mlx42
 
 # Include directories
 INCLUDES	:= -I ./include -I ./lib/libft -I $(LIBMLX)/include
@@ -72,6 +72,20 @@ clone_submodules:
 	fi
 
 libmlx:
+	@if [ ! -d "$(LIBMLX)" ]; then \
+		if [ -f .gitmodules ]; then \
+			url=$$(grep -A 1 'lib/mlx42' .gitmodules | grep 'url =' | awk '{print $$3}'); \
+			if [ -n "$$url" ]; then \
+				git clone "$$url" "$(LIBMLX)"; \
+			else \
+				echo "Error: URL for MLX42 not found in .gitmodules"; \
+				exit 1; \
+			fi; \
+		else \
+			echo "Error: .gitmodules file not found"; \
+			exit 1; \
+		fi; \
+	fi
 	@if [ ! -d "$(LIBMLX)/build" ]; then \
 		cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; \
 	fi
