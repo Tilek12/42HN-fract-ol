@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:17:27 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/06/10 11:25:52 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:06:12 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	input_handler(int argc, char **argv, t_fractal *f)
 		ft_printf(R"\n\t-------- !!! Incorrect input !!! --------\n\n"RES);
 		ft_printf(G"\tPlease, follow the examples:\n\n"RES);
 		ft_printf(Y"\t\" ./fractol mandelbrot \"\n"RES);
-		ft_printf(Y"\t\" ./farctol julia <real value> <i value> \"\n"RES);
+		ft_printf(Y"\t\" ./fractol julia <real value> <i value> \"\n\n"RES);
 		exit(EXIT_FAILURE);
 	}
 }
