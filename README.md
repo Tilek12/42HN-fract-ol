@@ -6,11 +6,11 @@
 
 <h1 align="center">
   Project - Fract-ol :milky_way:
+  <h2 align="center">
+    :white_check_mark: 125/125
+  </h2>
 </h1>
 
-<h2 align="center">
-  :white_check_mark: 125/125
-</h2>
 
 ## :clipboard: Project info: [subject](https://github.com/Tilek12/42HN-fract-ol/blob/master/.git_docs_fract-ol/en.subject_fract-ol.pdf)
 
@@ -21,17 +21,17 @@ A **fractal** is an abstract mathematical object, like a curve or a surface, whi
 
 ## :green_circle: Mandatory Part
 
-**Program name** | fractol
-:---|:---
-**Turn in files** | Makefile, *.h, *.c
-**Makefile** | NAME, all, clean, fclean, re
-**Arguments** | The type of fractal to display and any other option available
+**Program name**     | fractol
+:---                 |:---
+**Turn in files**    | Makefile, *.h, *.c
+**Makefile**         | NAME, all, clean, fclean, re
+**Arguments**        | The type of fractal to display and any other option available
 **External functs.** | • open, close, read, write, malloc, free, perror, strerror, exit
-| | • All functions of the math library (-lm compiler option, man man 3 math)
-| | • All functions of the MiniLibX
-| | • ft_printf and any equivalent YOU coded
+|                    | • All functions of the math library (-lm compiler option, man man 3 math)
+|                    | • All functions of the MiniLibX
+|                    | • ft_printf and any equivalent YOU coded
 **Libft authorized** | Yes
-**Description** | This project is about creating a small fractal exploration program. First, you have to know what a fractal is.
+**Description**      | This project is about creating a small fractal exploration program. First, you have to know what a fractal is.
 
 ### :eight_spoked_asterisk: V.1 Rendering
 - Your program must offer the **Julia** set and the **Mandelbrot** set.
@@ -69,28 +69,30 @@ MLX42 (an alternative of the MiniLibX) is a simple cross-platform graphics libra
 
 After running the program, with starting Makefile, the MLX42 library will be downloaded from it's original github repository and will be installed in lib/mlx42 directory.
 
+---
+
 ## :red_circle: Control
 
 :keyboard: **Keyboard control:**
 
-Keyboard buttons | Definition
-:---|:---
-:arrow_up: Arrow up | Shift the image up
-:arrow_down: Arrow down | Shift the image down
-:arrow_left: Arrow left | Shift the image left
+Keyboard buttons          | Definition
+:---                      |:---
+:arrow_up: Arrow up       | Shift the image up
+:arrow_down: Arrow down   | Shift the image down
+:arrow_left: Arrow left   | Shift the image left
 :arrow_right: Arrow right | Shift the image right
-:heavy_minus_sign: Minus | Increase the number of iterations. Make the image sharper by filling it with more pixels per point.
-:heavy_plus_sign: Plus | Decrease the number of iterations.  Make the image less sharp by filling it with less pixels per point.
-**"O"** | Actavate the **"Original"** mode - image with usual colors
-**"P"** | Actavate the **"Psychedelic"** mode - image with psychedelic colors
-**"L"** | Actavate the **"Mutable"** mode (for **Julia** set only) - create different Julia sets according to coordinates of the mouse cursor. Clicking the **"L"** buton again switch this mode off.
-**"ESC"** | Exit the program
+:heavy_minus_sign: Minus  | Increase the number of iterations. Make the image sharper by filling it with more pixels per point.
+:heavy_plus_sign: Plus    | Decrease the number of iterations.  Make the image less sharp by filling it with less pixels per point.
+**"O"**                   | Actavate the **"Original"** mode - image with usual colors
+**"P"**                   | Actavate the **"Psychedelic"** mode - image with psychedelic colors
+**"L"**                   | Actavate the **"Mutable"** mode (for **Julia** set only) - create different Julia sets according to coordinates of the mouse cursor. Clicking the **"L"** buton again switch this mode off.
+**"ESC"**                 | Exit the program
 
 :computer_mouse: **Mouse control:**
 
 Mouse wheel | Definition
-:---|:---
-Scroll up | Zoom in the image
+:---        |:---
+Scroll up   | Zoom in the image
 Scroll down | Zoom out the image
 
 ---
