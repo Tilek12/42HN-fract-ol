@@ -63,7 +63,7 @@ You will get some extra points with the following features:
 
 ## :large_blue_circle: Graphics library
 
-This project is based on [MLX42 library](https://github.com/codam-coding-college/MLX42).
+This project is based on [MLX42](https://github.com/codam-coding-college/MLX42) library.
 
 MLX42 (an alternative of the MiniLibX) is a simple cross-platform graphics library running on GLFW and OpenGL.
 
